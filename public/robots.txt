@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /messages/
+Disallow: /settings/
+Disallow: /payment/
+
+Sitemap: https://mglink-connect.com/sitemap.xml
+
