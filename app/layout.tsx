@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { Toaster } from "@/components/ui/toaster"
 import type { Metadata } from "next"
+import { AuthProvider } from "@/lib/auth" // Import your AuthProvider
 
 export const metadata: Metadata = {
   title: {
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -60,25 +61,23 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <ErrorBoundary>
-            <div className="flex min-h-screen flex-col">
-              <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <div className="container flex h-16 items-center">
-                  <MainNav />
-                  <MobileNav />
-                </div>
-              </header>
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-            <Toaster />
-          </ErrorBoundary>
+          <AuthProvider> {/* Wrap with AuthProvider */}
+            <ErrorBoundary>
+              <div className="flex min-h-screen flex-col">
+                <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                  <div className="container flex h-16 items-center">
+                    <MainNav />
+                    <MobileNav />
+                  </div>
+                </header>
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </div>
+              <Toaster />
+            </ErrorBoundary>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
   )
 }
-
-
-
-import './globals.css'
