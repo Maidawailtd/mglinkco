@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Briefcase, Clock, DollarSign, MapPin, Star } from "lucide-react"
 import Image from "next/image"
 import { handleError } from "@/lib/error-handling"
+import { Toast } from "@/components/ui/toast"
 
 // Job category images mapping
 const categoryImages: Record<string, string> = {
@@ -294,7 +295,10 @@ function handleSaveJob(jobId: number) {
   try {
     // In a real app, this would make an API call to save the job
     console.log(`Job ${jobId} saved`)
-    // You could also use toast notification here
+    Toast({
+      title: "Job Saved",
+      description: "This job has been saved to your profile",
+    })
   } catch (error) {
     handleError(error, "Failed to save job. Please try again.")
   }
